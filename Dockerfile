@@ -23,7 +23,7 @@ RUN docker-php-ext-install -j$(nproc) gd calendar intl imap zip mysqli
 # xml
 
 # Copie le code source de Dolibarr
-COPY ./dock_dolibarr /var/www/html
+COPY ./website /var/www/html
 
 # Change les permissions du dossier
 RUN chown -R www-data:www-data /var/www/html

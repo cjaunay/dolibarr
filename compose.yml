@@ -1,14 +1,8 @@
 services:
   website:
-    container_name: website
+    container_name: madine-website
     build: .
-    environment:
-      - DOLI_DB_HOST=database
-      - DOLI_DB_USER=root
-      - DOLI_DB_PASSWORD=root
-      - DOLI_DB_NAME=dolibarr
     volumes:
-      # - dolibarr-data:/var/www/html
       - dolibarr-custom:/var/www/html/htdocs/custom
       - dolibarr-documents:/var/www/html/documents
     networks:
@@ -16,45 +10,13 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.website.entrypoints=web
-      - traefik.http.routers.website.rule=Host(`<subdomain>.<domain>`)
+      - traefik.http.routers.website.rule=Host(`madine.timesaving.fr`)
       - traefik.http.services.website.loadbalancer.server.port=80
-    # depends_on:
-    #   - database
-
-  # database:
-  #   container_name: database
-  #   image: mysql:lts
-  #   environment:
-  #     - MYSQL_ROOT_PASSWORD=root
-  #     - MYSQL_DATABASE=dolibarr
-  #   volumes:
-  #     - mysql-data:/var/lib/mysql
-  #   networks:
-  #     - traefik_default
-
-  # adminer:
-  #   container_name: adminer
-  #   image: adminer:4.8.1
-  #   environment:
-  #     - ADMINER_DEFAULT_SERVER=database
-  #   volumes:
-  #     - ./dock_adminer/adminer.css:/var/www/html/adminer.css
-  #   networks:
-  #     - traefik_default
-  #   labels:
-  #     - traefik.enable=true
-  #     - traefik.http.routers.adminer.entrypoints=web
-  #     - traefik.http.routers.adminer.rule=Host(`adminer.<subdomain>.<domain>`)
-  #     - traefik.http.services.adminer.loadbalancer.server.port=8080
-  #   # depends_on:
-  #   #   - database
 
 networks:
   traefik_default:
     external: true
 
 volumes:
-  # dolibarr-data:
   dolibarr-custom:
   dolibarr-documents:
-  # mysql-data:
