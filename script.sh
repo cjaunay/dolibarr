@@ -312,7 +312,7 @@ services:
       - traefik.http.routers.${COMPANY_NAME_UNDERSCORE}.tls=true
       - traefik.http.routers.${COMPANY_NAME_UNDERSCORE}.tls.certresolver=production
       - traefik.http.routers.${COMPANY_NAME_UNDERSCORE}.rule=Host(\`${TRAEFIK_HOST}\`)
-      - traefik.http.services.website.loadbalancer.server.port=80
+      - traefik.http.services.${COMPANY_NAME_UNDERSCORE}.loadbalancer.server.port=80
     networks:
       - traefik_default
     restart: always
